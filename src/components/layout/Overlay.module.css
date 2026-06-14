@@ -1,0 +1,67 @@
+.modeToggle {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  pointer-events: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navArrowLeft {
+  left: 40px;
+}
+.navArrowRight {
+  right: 40px;
+}
+
+.navArrowLeftExperimental {
+  left: calc(50% - 300px);
+}
+.navArrowRightExperimental {
+  right: calc(50% - 300px);
+}
+
+@media (max-width: 1024px) {
+  .navArrowLeftExperimental {
+    left: calc(50% - 240px);
+  }
+  .navArrowRightExperimental {
+    right: calc(50% - 240px);
+  }
+}
+
+@media (max-width: 768px) {
+  .modeToggle {
+    top: 20px;
+  }
+  .navArrow {
+    top: auto;
+    bottom: 80px;
+    transform: none;
+  }
+  .navArrowLeft, .navArrowLeftExperimental {
+    left: 20px;
+  }
+  .navArrowRight, .navArrowRightExperimental {
+    right: 20px;
+  }
+  .navArrow svg {
+    width: 40px;
+    height: 40px;
+  }
+}
