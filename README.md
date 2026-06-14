@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="https://img.shields.io/badge/SYSTEM-POLARIS_CORE-00ffcc?style=for-the-badge&logoColor=black" alt="Polaris Core" />
+  <img src="https://img.shields.io/badge/STATUS-ONLINE-ff3366?style=for-the-badge&logoColor=white" alt="Status Online" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  <h1>P O L A R I S</h1>
 
-Currently, two official plugins are available:
+  <p><b>A highly detailed interactive celestial simulation engine powered by raw point cloud data. Designed for exploration of the unknown.</b></p>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ⚡ DIRECTIVE
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Polaris** is a cutting-edge 3D web engine built to render extreme-density celestial point clouds. It features two distinct operational interfaces:
+- **Standard Mode**: Clean, data-driven interface for casual observation.
+- **Experimental Mode**: Raw, cyberpunk-inspired tactical UI for advanced telemetry.
 
-## Expanding the ESLint configuration
+## 🛠️ TECH STACK
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=00ffcc" />
+  <img src="https://img.shields.io/badge/ThreeJs-black?style=for-the-badge&logo=three.js&logoColor=ff3366" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Zustand-443E38?style=for-the-badge&logoColor=00ffcc" />
+</p>
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 INITIATE SEQUENCE
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To boot the Polaris engine locally:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone the repository
+git clone https://github.com/malikgaurav626/polaris.git
+
+# Navigate to the core directory
+cd polaris
+
+# Install dependencies
+npm install
+
+# Engage thrusters
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌌 CORE SYSTEMS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> **Point Cloud Morphing**
+> The engine dynamically interpolates millions of data points between celestial bodies (Earth, Mars, Jupiter, etc.) using high-performance WebGL shaders.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+> **Polaris Forge**
+> Powered by our proprietary Python CLI tool to downsample ultra-dense 3D meshes into optimized `.bin` buffers for instantaneous web delivery.
+
+> **Tactical UI**
+> Fully responsive HUDs utilizing Framer Motion for buttery-smooth state transitions.
+
+---
+<div align="center">
+  <p><code>/// VAPORSQUAD • INNER EXPLORATION ///</code></p>
+</div>
