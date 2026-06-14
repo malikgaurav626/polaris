@@ -28,25 +28,25 @@ export function StandardLayout({ planet }: LayoutProps) {
           POLARIS
           <span>• • • SYSTEM • • •</span>
         </motion.div>
-        
-        <motion.div 
-          className={styles.navIndicators}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          {planets.map((p, i) => (
-            <div 
-              key={p.id} 
-              onClick={() => setPlanetIndex(i)}
-              className={`${styles.indicator} ${i === currentPlanetIndex ? styles.active : ''}`} 
-            />
-          ))}
-        </motion.div>
       </div>
 
       <div className={styles.content}>
         <div className={styles.leftCol}>
+          <motion.div 
+            className={styles.navIndicators}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            {planets.map((p, i) => (
+              <div 
+                key={p.id} 
+                onClick={() => setPlanetIndex(i)}
+                className={`${styles.indicator} ${i === currentPlanetIndex ? styles.active : ''}`} 
+              />
+            ))}
+          </motion.div>
+
           <motion.h1
             layoutId="title-panel"
             className={styles.title}
