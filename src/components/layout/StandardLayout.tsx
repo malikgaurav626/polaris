@@ -90,7 +90,7 @@ export function StandardLayout({ planet }: LayoutProps) {
               className={styles.rightCol}
               initial={isMobile ? { height: 0, opacity: 0 } : false}
               animate={isMobile ? { height: 'auto', opacity: 1 } : false}
-              exit={isMobile ? { height: 0, opacity: 0 } : false}
+              exit={isMobile ? { height: 0, opacity: 0 } : undefined}
               transition={{ duration: 0.3 }}
               style={{ overflow: 'hidden' }}
             >

@@ -11,7 +11,7 @@ export function OrbitingText() {
 
   const planet = planets[currentPlanetIndex];
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (groupRef.current) {
       // Scale matches the planet's scale
       const targetScale = hasLanded ? 1.5 : 2.5;

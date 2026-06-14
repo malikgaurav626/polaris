@@ -9,7 +9,7 @@ export function Scene() {
   const { hasLanded } = useNavigationStore();
   const groupRef = useRef<THREE.Group>(null);
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!groupRef.current) return;
 
     // Smoothly animate camera/group position based on landing state

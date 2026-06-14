@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { LayoutGroup, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigationStore } from '../../store/useNavigationStore';
 import { planets } from '../../data/planets';
 import { StandardLayout } from './StandardLayout';

@@ -58,7 +58,7 @@ export function ExperimentalLayout({ planet }: LayoutProps) {
             <motion.div
               initial={isMobile ? { height: 0, opacity: 0 } : false}
               animate={isMobile ? { height: 'auto', opacity: 1 } : false}
-              exit={isMobile ? { height: 0, opacity: 0 } : false}
+              exit={isMobile ? { height: 0, opacity: 0 } : undefined}
               transition={{ duration: 0.3 }}
               style={{ overflow: 'hidden' }}
             >
@@ -78,7 +78,7 @@ export function ExperimentalLayout({ planet }: LayoutProps) {
             className={styles.rightColumn}
             initial={isMobile ? { height: 0, opacity: 0 } : false}
             animate={isMobile ? { height: 'auto', opacity: 1 } : false}
-            exit={isMobile ? { height: 0, opacity: 0 } : false}
+            exit={isMobile ? { height: 0, opacity: 0 } : undefined}
             transition={{ duration: 0.3 }}
             style={{ overflow: 'hidden' }}
           >

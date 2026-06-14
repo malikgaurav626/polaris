@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { useNavigationStore } from '../../store/useNavigationStore';
 import { planets } from '../../data/planets';
 
@@ -217,6 +217,7 @@ export function PlanetMorpher() {
   return (
     <points ref={meshRef} position={[0, 0, 0]}>
       <bufferGeometry ref={geomRef}>
+        {/* @ts-ignore */}
         <bufferAttribute
           attach="attributes-position"
           count={currentGeometry.pos.length / 3}
@@ -224,6 +225,7 @@ export function PlanetMorpher() {
           itemSize={3}
           needsUpdate={true}
         />
+        {/* @ts-ignore */}
         <bufferAttribute
           attach="attributes-color"
           count={currentGeometry.col.length / 3}
@@ -231,6 +233,7 @@ export function PlanetMorpher() {
           itemSize={3}
           needsUpdate={true}
         />
+        {/* @ts-ignore */}
         <bufferAttribute
           attach="attributes-targetPosition"
           count={targetGeometry.pos.length / 3}
@@ -238,6 +241,7 @@ export function PlanetMorpher() {
           itemSize={3}
           needsUpdate={true}
         />
+        {/* @ts-ignore */}
         <bufferAttribute
           attach="attributes-targetColor"
           count={targetGeometry.col.length / 3}
