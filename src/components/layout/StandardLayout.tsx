@@ -90,20 +90,6 @@ export function StandardLayout({ planet }: LayoutProps) {
             {showData ? '[-] HIDE DATA' : '[+] SHOW DATA'}
           </button>
 
-          <motion.div layoutId="controls-panel" className={styles.controls}>
-            <div className={styles.sliderWrapper}>
-              <div className={styles.sliderLabel}>
-                <span>BRIGHTNESS</span>
-                <span>{Math.round(surfaceGlow * 100)}%</span>
-              </div>
-              <input 
-                type="range" min="0" max="1" step="0.01" 
-                value={surfaceGlow} 
-                onChange={(e) => setSurfaceGlow(parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-            </div>
-          </motion.div>
         </div>
 
         <AnimatePresence>
@@ -127,6 +113,21 @@ export function StandardLayout({ planet }: LayoutProps) {
                     </div>
                   ))
                 )}
+              </motion.div>
+              
+              <motion.div layoutId="controls-panel" className={styles.controls}>
+                <div className={styles.sliderWrapper}>
+                  <div className={styles.sliderLabel}>
+                    <span>BRIGHTNESS</span>
+                    <span>{Math.round(surfaceGlow * 100)}%</span>
+                  </div>
+                  <input 
+                    type="range" min="0" max="1" step="0.01" 
+                    value={surfaceGlow} 
+                    onChange={(e) => setSurfaceGlow(parseFloat(e.target.value))}
+                    className={styles.slider}
+                  />
+                </div>
               </motion.div>
             </motion.div>
           )}
