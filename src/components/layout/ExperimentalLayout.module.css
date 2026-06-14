@@ -161,7 +161,7 @@
   .rightColumn.showData {
     display: flex;
   }
-  .title { font-size: 2rem; text-align: center; margin-bottom: 8px; }
+  .title { font-size: 2rem; text-align: left; margin-bottom: 8px; }
   .panelBox { padding: 8px; font-size: 0.75rem; margin-bottom: 12px; }
   .descBox { font-size: 0.65rem; padding: 8px; line-height: 1.2; }
   .controlsBox { padding: 8px; }
