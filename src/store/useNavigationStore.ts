@@ -13,6 +13,8 @@ interface NavigationState {
   setSurfaceGlow: (glow: number) => void;
   uiMode: 'standard' | 'experimental';
   toggleUiMode: () => void;
+  isModelLoading: boolean;
+  setModelLoading: (loading: boolean) => void;
 }
 
 export const useNavigationStore = create<NavigationState>()(
@@ -22,6 +24,7 @@ export const useNavigationStore = create<NavigationState>()(
       hasLanded: false,
       surfaceGlow: 0.0,
       uiMode: 'standard',
+      isModelLoading: true, // Start true initially until first planet loads
       nextPlanet: () => 
         set((state) => ({ 
           currentPlanetIndex: (state.currentPlanetIndex + 1) % planets.length 
@@ -36,6 +39,7 @@ export const useNavigationStore = create<NavigationState>()(
       toggleUiMode: () => set((state) => ({ 
         uiMode: state.uiMode === 'standard' ? 'experimental' : 'standard' 
       })),
+      setModelLoading: (loading) => set({ isModelLoading: loading }),
     }),
     {
       name: 'polaris-storage',

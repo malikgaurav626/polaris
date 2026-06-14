@@ -109,11 +109,12 @@ export function PlanetMorpher() {
   const meshRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const { currentPlanetIndex, hasLanded, surfaceGlow } = useNavigationStore();
+  const { currentPlanetIndex, hasLanded, surfaceGlow, setModelLoading } = useNavigationStore();
 
   // State for the geometry arrays
   const [currentGeometry, setCurrentGeometry] = useState<{ pos: Float32Array, col: Float32Array } | null>(null);
   const [targetGeometry, setTargetGeometry] = useState<{ pos: Float32Array, col: Float32Array } | null>(null);
+  const [initialLoaded, setInitialLoaded] = useState(false);
 
   // Animation state
   const morphProgress = useRef(0);
@@ -121,10 +122,13 @@ export function PlanetMorpher() {
   const targetPlanetIndex = useRef(currentPlanetIndex);
 
   // Fetch bin file helper
-  const fetchPlanetData = async (url: string) => {
+  const fetchPlanetData = async (url: string, isBackground = false) => {
     if (geometryCache[url]) {
+      if (!isBackground) setModelLoading(false);
       return geometryCache[url];
     }
+
+    if (!isBackground) setModelLoading(true);
 
     const res = await fetch(url);
     const buffer = await res.arrayBuffer();
@@ -146,6 +150,7 @@ export function PlanetMorpher() {
 
     const geom = { pos: positions, col: colors };
     geometryCache[url] = geom;
+    if (!isBackground) setModelLoading(false);
     return geom;
   };
 
@@ -154,8 +159,30 @@ export function PlanetMorpher() {
     fetchPlanetData(planets[0].modelUrl).then(data => {
       setCurrentGeometry(data);
       setTargetGeometry(data); // Initial target is same as current
+      setInitialLoaded(true);
     });
   }, []);
+
+  // Background Prefetching Queue
+  useEffect(() => {
+    if (!initialLoaded) return;
+    
+    const prefetchAll = async () => {
+      for (let i = 1; i < planets.length; i++) {
+        const url = planets[i].modelUrl;
+        if (!geometryCache[url]) {
+          try {
+            await fetchPlanetData(url, true);
+          } catch (e) {
+            console.warn("Failed to prefetch", url, e);
+          }
+        }
+      }
+    };
+    
+    // Small delay to let the initial rendering settle
+    setTimeout(prefetchAll, 2000);
+  }, [initialLoaded]);
 
   // Handle Planet Change
   useEffect(() => {

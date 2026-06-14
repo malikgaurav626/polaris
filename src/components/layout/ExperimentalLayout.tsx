@@ -19,7 +19,7 @@ interface LayoutProps {
 }
 
 export function ExperimentalLayout({ planet }: LayoutProps) {
-  const { currentPlanetIndex, setPlanetIndex } = useNavigationStore();
+  const { currentPlanetIndex, setPlanetIndex, isModelLoading } = useNavigationStore();
   const [showData, setShowData] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -34,7 +34,24 @@ export function ExperimentalLayout({ planet }: LayoutProps) {
       
       {/* Left Column: Mission & Atmosphere */}
       <div className={styles.leftColumn}>
-        <TitlePanel planet={planet} className={`${styles.title} experimental-heading`} />
+        <AnimatePresence mode="wait">
+          {isModelLoading ? (
+            <motion.div
+              key="loading-title"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`${styles.title} experimental-heading`}
+              style={{ color: '#00ffcc', padding: '10px 0', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              [ ACQUIRING DATA... ]
+            </motion.div>
+          ) : (
+            <motion.div key="content-title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <TitlePanel planet={planet} className={`${styles.title} experimental-heading`} />
+            </motion.div>
+          )}
+        </AnimatePresence>
         
         <div className={styles.navIndicators}>
           {planets.map((p, i) => (
@@ -62,10 +79,18 @@ export function ExperimentalLayout({ planet }: LayoutProps) {
               transition={{ duration: 0.3 }}
               style={{ overflow: 'hidden' }}
             >
-              {!isMobile && (
-                <MissionPanel planet={planet} className={styles.panelBox} />
+              {isModelLoading ? (
+                <div className={styles.panelBox} style={{ color: 'rgba(0,255,204,0.5)' }}>
+                  [ SYNCING CORE PROTOCOLS ]
+                </div>
+              ) : (
+                <>
+                  {!isMobile && (
+                    <MissionPanel planet={planet} className={styles.panelBox} />
+                  )}
+                  <AtmospherePanel planet={planet} className={styles.panelBox} />
+                </>
               )}
-              <AtmospherePanel planet={planet} className={styles.panelBox} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -80,19 +105,27 @@ export function ExperimentalLayout({ planet }: LayoutProps) {
             animate={isMobile ? { height: 'auto', opacity: 1 } : false}
             exit={isMobile ? { height: 0, opacity: 0 } : undefined}
             transition={{ duration: 0.3 }}
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
           >
-            {!isMobile && (
-              <div className={styles.topRight}>
-                <EquipmentPanel planet={planet} className={styles.panelBox} />
+            {isModelLoading ? (
+              <div style={{ flex: 1, minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(0,255,204,0.5)', border: '1px dashed rgba(0,255,204,0.3)', marginTop: isMobile ? 0 : '10px' }}>
+                [ ESTABLISHING CONNECTION... ]
               </div>
+            ) : (
+              <>
+                {!isMobile && (
+                  <div className={styles.topRight}>
+                    <EquipmentPanel planet={planet} className={styles.panelBox} />
+                  </div>
+                )}
+                
+                <div className={styles.bottomRight}>
+                  <StatsPanel planet={planet} className={styles.statsGrid} />
+                  <DescPanel planet={planet} className={styles.descBox} />
+                  <ControlsPanel className={styles.controlsBox} />
+                </div>
+              </>
             )}
-            
-            <div className={styles.bottomRight}>
-              <StatsPanel planet={planet} className={styles.statsGrid} />
-              <DescPanel planet={planet} className={styles.descBox} />
-              <ControlsPanel className={styles.controlsBox} />
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

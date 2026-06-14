@@ -10,7 +10,7 @@ interface LayoutProps {
 }
 
 export function StandardLayout({ planet }: LayoutProps) {
-  const { currentPlanetIndex, setPlanetIndex, surfaceGlow, setSurfaceGlow } = useNavigationStore();
+  const { currentPlanetIndex, setPlanetIndex, surfaceGlow, setSurfaceGlow, isModelLoading } = useNavigationStore();
   const [showData, setShowData] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -47,19 +47,41 @@ export function StandardLayout({ planet }: LayoutProps) {
             ))}
           </motion.div>
 
-          <motion.h1
-            layoutId="title-panel"
-            className={styles.title}
-          >
-            {planet.name}
-          </motion.h1>
+          <AnimatePresence mode="wait">
+            {isModelLoading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ marginBottom: '24px' }}
+              >
+                <h1 className={styles.title} style={{ color: 'rgba(255,255,255,0.4)', fontSize: '2rem' }}>[ LOADING DATA... ]</h1>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ marginBottom: '24px' }}
+              >
+                <motion.h1
+                  layoutId="title-panel"
+                  className={styles.title}
+                >
+                  {planet.name}
+                </motion.h1>
 
-          <motion.p 
-            layoutId="desc-panel" 
-            className={styles.description}
-          >
-            {planet.description}
-          </motion.p>
+                <motion.p 
+                  layoutId="desc-panel" 
+                  className={styles.description}
+                >
+                  {planet.description}
+                </motion.p>
+              </motion.div>
+            )}
+          </AnimatePresence>
           
           <button 
             className={styles.mobileDataToggle} 
@@ -95,12 +117,16 @@ export function StandardLayout({ planet }: LayoutProps) {
               style={{ overflow: 'hidden' }}
             >
               <motion.div layoutId="stats-panel" className={styles.statsContainer}>
-                {planet.stats.map((stat, i) => (
-                  <div key={i} className={styles.statBlock}>
-                    <div className={styles.statNumber}>{stat.value.split(' ')[0]}</div>
-                    <div className={styles.statLabel}>{stat.label} - {stat.value}</div>
-                  </div>
-                ))}
+                {isModelLoading ? (
+                  <div style={{ color: 'rgba(255,255,255,0.4)', padding: '20px', fontFamily: 'monospace' }}>[ BUFFERING METRICS... ]</div>
+                ) : (
+                  planet.stats.map((stat, i) => (
+                    <div key={i} className={styles.statBlock}>
+                      <div className={styles.statNumber}>{stat.value.split(' ')[0]}</div>
+                      <div className={styles.statLabel}>{stat.label} - {stat.value}</div>
+                    </div>
+                  ))
+                )}
               </motion.div>
             </motion.div>
           )}
