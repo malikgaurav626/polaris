@@ -48,7 +48,8 @@ export function Overlay() {
             fontSize: '0.8rem',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            fontFamily: uiMode === 'standard' ? 'Inter' : 'Share Tech Mono'
+            fontFamily: uiMode === 'standard' ? 'Inter' : 'Share Tech Mono',
+            whiteSpace: 'nowrap'
           }}
         >
           MODE: {uiMode}
