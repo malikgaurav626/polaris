@@ -203,8 +203,11 @@ export function PlanetMorpher() {
     materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
     materialRef.current.uniforms.uSurfaceGlow.value = surfaceGlow;
 
-    // Smoothly interpolate scale based on landing state
-    const targetScale = hasLanded ? 1.5 : 2.5;
+    // Smoothly interpolate scale based on landing state and screen size
+    const isMobile = window.innerWidth <= 768;
+    const targetScale = hasLanded 
+      ? (isMobile ? 1.0 : 1.5) 
+      : (isMobile ? 1.5 : 2.5);
     meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.05);
 
     // Slow rotation
