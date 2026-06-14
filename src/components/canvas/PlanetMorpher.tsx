@@ -103,6 +103,8 @@ const fragmentShader = `
   }
 `;
 
+const geometryCache: Record<string, { pos: Float32Array, col: Float32Array }> = {};
+
 export function PlanetMorpher() {
   const meshRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
@@ -120,7 +122,11 @@ export function PlanetMorpher() {
 
   // Fetch bin file helper
   const fetchPlanetData = async (url: string) => {
-    const res = await fetch(`${url}?v=${Date.now()}`);
+    if (geometryCache[url]) {
+      return geometryCache[url];
+    }
+
+    const res = await fetch(url);
     const buffer = await res.arrayBuffer();
     const data = new Float32Array(buffer);
 
@@ -138,7 +144,9 @@ export function PlanetMorpher() {
       colors[i * 3 + 2] = data[i * 6 + 5];
     }
 
-    return { pos: positions, col: colors };
+    const geom = { pos: positions, col: colors };
+    geometryCache[url] = geom;
+    return geom;
   };
 
   // Initial Load
